@@ -3298,6 +3298,13 @@ $.jgrid.extend({
 					if(t.rows.length === 0){
 						$("table:first",t.grid.bDiv).append(row.join(''));
 					} else {
+                        if ( pos.indexOf("afterSelected") == 0 ||
+                            pos.indexOf("beforeSelected") == 0
+                            )
+                        {
+                            src = $(t).jqGrid("getGridParam", "selrow");
+                            pos = src ? pos.replace("Selected", "") : ((pos+"|last").split("|"))[1];
+                        }
 						switch (pos) {
 							case 'last':
 								$(t.rows[t.rows.length-1]).after(row.join(''));
